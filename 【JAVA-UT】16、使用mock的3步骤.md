@@ -1,7 +1,8 @@
-
-Mockito是一个优秀的mock框架。
+文|码术张
 
 如何使用mock？
+
+首先选择一个框架Mockito是一个优秀的mock框架。
 
 使用mock的过程，就像装一颗假牙。
 
@@ -95,8 +96,6 @@ alarmer    = mock(Alarmer.class);
 `when(nameLoader.download(anyString())).thenReturn(nameList);`
 
 这相当于打磨假牙，让它用得舒服。
-
-alarmer没有相应的when语句，因为它简单，无需打磨。
 
 **步骤3：调用Mockito的verify语句**
 
