@@ -1,8 +1,6 @@
 文|码术张
 
-如何使用mock？
-
-首先选择一个框架Mockito是一个优秀的mock框架。
+如何使用Mockito mock？
 
 使用mock的过程，就像装一颗假牙。
 
@@ -39,9 +37,9 @@ public class NameChecker {
 }
 ```
 
-NameChecker类中有一个方法nameIsOnServer，用于检查一个名字是不是记录在服务器中。
+NameChecker类中有一个方法nameIsOnServer，用于检查一个名字是否在服务器中。
 
-nameIsOnServer有两个参数，第一个参数是服务器地址，第二个参数是被检查的名字。
+nameIsOnServer有两个参数，addr是服务器地址，name是被检查的名字。
 
 如果name不在服务器中，则返回false，并且报警。
 
@@ -80,7 +78,7 @@ public class NameCheckerTest {
 
 NameLoader和Alarmer是与NameChecker合作的类。在ut中，一般需要使用假的合作类，以摆脱对它们的依赖，达到测试当前类的目标。
 
-***步骤1：调用Mockito的mock语句***
+***步骤1：调用Mockito mock语句***
 
 ```
 nameLoader = mock(NameLoader.class);
