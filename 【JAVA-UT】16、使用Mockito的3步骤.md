@@ -2,7 +2,7 @@
 
 如何使用Mockito mock？
 
-使用mock的过程，就像装一颗假牙。
+使用mock的过程，好比做一颗假牙。
 
 装假牙的过程是怎样的呢？让我们跟着埃德蒙一起走进牙科医院。
 
@@ -39,7 +39,7 @@ public class NameChecker {
 
 NameChecker类中有一个方法nameIsOnServer，用于检查一个名字是否在服务器中。
 
-nameIsOnServer有两个参数，addr是服务器地址，name是被检查的名字。
+nameIsOnServer有两个参数，addr是服务器地址，name是待检查的名字。
 
 如果name不在服务器中，则返回false，并且报警。
 
@@ -93,7 +93,7 @@ alarmer    = mock(Alarmer.class);
 
 `when(nameLoader.download(anyString())).thenReturn(nameList);`
 
-这相当于打磨假牙，让它用得舒服。
+
 
 **步骤3：调用Mockito的verify语句**
 
