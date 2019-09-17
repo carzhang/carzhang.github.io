@@ -4,29 +4,29 @@
 
 ### 1、相同点
 
-都是在ut中消除依赖的一种方式。
+都可用于消除被测类对其他类的依赖。
 
-如前面两节，针对同一个类，在ut中分别使用了stub和mock，最后达到同样的测试效果。
+如前两节，对同一个类分别使用了stub和mock方式消除依赖，达到同样的测试效果。
 
 ### 2、不同点
 
 #### 2.1 实现方式不同
 
-stub需要手动实现被依赖项，而mock则是使用mock framework。
+在《什么是stub》中，依赖是NameLoader，ut中实际使用的是NameLoaderStub。
 
-在《什么是stub》中，依赖是NameLoader，ut中实际使用的是：
+NameLoaderStub是开发者一行行写出来的。
 
-NameLoader的手动实现版本NameLoaderStub。
+同样的依赖NameLoader，在《mock--消除依赖的一种方法》一文里的ut中，实际使用的是nameLoader。
 
-在《mock--消除依赖的另一种方法》中，同样的依赖NameLoader，ut中实际使用的是：
+`			nameLoader = mock(NameLoader.class);`			
 
-Mockito框架中的mock方法实现的版本nameLoader：
-
-`			nameLoader = mock(NameLoader.class);`
+它是Mockito mock类的一个实例。
 
 #### 2.2 测试类型不同
 
-使用stub，只能做状态测试；使用mock，只可以做行为测试。
+使用stub的ut，只能做状态测试；
+
+使用mock的ut，既可做状态测试，也可做行为测试。
 
 ##### 2.2.1 状态测试
 
@@ -48,7 +48,7 @@ assertTrue(result)的作用是验证result是否为true。result是行为nameIsO
 
 什么是行为测试(**behavior verification**)？
 
-即验证是否存在某个行为。
+即测试是否存在某个行为。
 
 举例如下。
 
