@@ -1,20 +1,16 @@
 文|码术张
 
-如何使用Mockito mock？
+Mockito是一个优秀的mocking framework。
 
-使用mock的过程，好比做一颗假牙。
+如何使用Mockito ？
 
-装假牙的过程是怎样的呢？让我们跟着埃德蒙一起走进牙科医院。
+`import static org.mockito.Mockito.*;`
 
-医生诊断出埃德蒙的一颗牙已坏，需用假牙替换掉它。
+在import后，就进入了Mockito大厅，接下来就可享用Mockito提供的美食了。
 
-一星期后，假牙做好了，装入埃德蒙的口中。做了几次咬合动作，又被取出，打磨打磨。再装进去。
+享用mockito的过程，一般分为3个步骤。
 
-直到医生和病人认为满意为止。
-
-整个配假牙的过程是：1 做假牙，2 配置假牙， 3 验证功能。
-
-让我们跟着埃德蒙走出医院，走进下面这个类:
+以下面这个类为例:
 
 ```
 public class NameChecker {
@@ -37,11 +33,15 @@ public class NameChecker {
 }
 ```
 
-NameChecker类中有一个方法nameIsOnServer，用于检查一个名字是否在服务器中。
+NameChecker有两个合作伙伴：NameLoader和Alarmer。
 
-nameIsOnServer有两个参数，addr是服务器地址，name是待检查的名字。
+NameLoader提供从server上下载名字的功能；Alarmer提供报警功能。
 
-如果name不在服务器中，则返回false，并且报警。
+NameChecker有方法nameIsOnServer。此方法用于检查名字是否在服务器中。
+
+它有两个参数，addr和name, 分别表示服务器地址和待检查的名字。
+
+若名字不在服务器中，会报警。
 
 下面的这段ut，是对报警功能的验证。
 
@@ -76,8 +76,6 @@ public class NameCheckerTest {
 }
 ```
 
-NameLoader和Alarmer是与NameChecker合作的类。在ut中，一般需要使用假的合作类，以摆脱对它们的依赖，达到测试当前类的目标。
-
 ***步骤1：调用Mockito mock语句***
 
 ```
@@ -85,32 +83,24 @@ nameLoader = mock(NameLoader.class);
 alarmer    = mock(Alarmer.class);
 ```
 
-这就好比是做假牙。
+其表达的是，分别将一个mock对象作为NameLoader和Alarmer的实例，而不使用真实的实例。
 
-假牙=mock(真牙)
-
-**步骤2：调用Mockito的when语句**
+***步骤2：调用Mockito when语句***
 
 `when(nameLoader.download(anyString())).thenReturn(nameList);`
 
+其表达的是，nameLoader对象的download方法被调用、且参数为String类型时，将nameList作为这个方法的返回值。
 
-
-**步骤3：调用Mockito的verify语句**
+**步骤3：调用Mockito verify语句**
 
 ```
 verify(nameLoader, times(1)).download(anyString());
 verify(alarmer, times(1)).reportAlarm(anyString());
 ```
 
-这就是验证牙齿的功能。
+verify用于验证期望nameLoader的download方法，alarmer的reportAlarm方法是否被调用了一次，而且参数是String类型。
 
-期望nameLoader的download方法被调用一次，alarmer的reportAlarm方法被调用一次。
-
-实际被调用了吗？
-
-verify语句可以检查出来。若符合期望，则ut状态就是pass；不符合，则fail。
-
-
+以上3步，是Mockito 语句的使用常见过程。
 
 
 
